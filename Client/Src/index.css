@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Autofill styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+}
+html.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+html.dark {
+  background-color: #1a202c;
+  color: #ffffff;
+}
+
+html.dotted {
+  background: radial-gradient(#999 1px, transparent 1px);
+  background-size: 10px 10px;
+  color: #000000;
+}
