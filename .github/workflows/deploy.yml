@@ -55,4 +55,3 @@ jobs:
       - name: GitHub Pages par deploy karna
         id: deployment
         uses: actions/deploy-pages@v4
-
