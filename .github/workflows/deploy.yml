@@ -1,1 +1,58 @@
+# GitHub Pages deploy karne ke liye aasan workflow
+name: Deploy React App to GitHub Pages
+
+on:
+  # 'main' branch par push karne par yeh chalega
+  push:
+    branches: ["main"]
+
+  # Actions tab se manually chalane ke liye
+  workflow_dispatch:
+
+# Deployment ke liye GITHUB_TOKEN ko permission dena
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Ek samay par ek hi deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code ko Checkout karna
+        uses: actions/checkout@v4
+
+      - name: Node.js set up karna
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Dependencies install karna
+        run: npm install
+        working-directory: ./client # 'client' folder ke andar command chalana
+
+      - name: Project ko build karna
+        run: npm run build
+        working-directory: ./client # 'client' folder ke andar command chalana
+
+      - name: GitHub Pages ko configure karna
+        uses: actions/configure-pages@v4
+
+      - name: Artifact upload karna
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 'client/dist' folder ko upload karna
+          path: './client/dist'
+
+      - name: GitHub Pages par deploy karna
+        id: deployment
+        uses: actions/deploy-pages@v4
 
