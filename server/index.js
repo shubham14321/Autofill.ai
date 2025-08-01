@@ -6,7 +6,19 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-// Connect to MongoDB
+// --- CORS Configuration ---
+// Sirf aapki live frontend website ko backend se baat karne ki permission dega
+const corsOptions = {
+  origin: "https://shubham14321.github.io",
+  optionsSuccessStatus: 200 
+};
+
+// Middlewares
+app.use(cors(corsOptions)); // CORS ko naye options ke saath use karein
+app.use(express.json());
+
+// --- Connect to MongoDB ---
+// Yeh bilkul sahi hai, koi badlaav ki zaroorat nahi
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -15,11 +27,13 @@ mongoose
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error("❌ MongoDB Error:", err));
 
-// Middlewares
-app.use(cors());
-app.use(express.json());
+// --- ROUTES ---
+// Ek basic test route, yeh check karne ke liye ki server chal raha hai ya nahi
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to Autofill.ai Backend! Server is running." });
+});
 
-// ROUTES IMPORT
+// Baaki saare routes bilkul sahi hain
 const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
 const shareProfileRoutes = require("./routes/shareProfile");
@@ -37,6 +51,7 @@ app.use("/api/form-suggestions", formSuggestionRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/institution-form", institutionFormRoutes);
 
-// START SERVER
+// --- START SERVER ---
+// Yeh bilkul sahi hai, koi badlaav ki zaroorat nahi
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
