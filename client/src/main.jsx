@@ -1,15 +1,28 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-// BrowserRouter ko import karne wali line ko badlein
-import { HashRouter } from 'react-router-dom'
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    {/* <BrowserRouter> ko <HashRouter> se badal dein */}
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </React.StrictMode>,
-)
+{
+  "name": "autofill-client",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://shubham14321.github.io/Autofill.ai",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "i18next": "^23.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^13.0.0",
+    "react-router-dom": "^6.18.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "gh-pages": "^4.0.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.3.0",
+    "vite": "^5.0.0"
+  }
+}
